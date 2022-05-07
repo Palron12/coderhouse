@@ -11,8 +11,10 @@ const productos = new Contenedor(__dirname + "/data/productos.json");
 
 app.use("/api/productos", router);
 app.use(express.static("./views"));
-app.listen(8080);
 
+app.listen(process.env.PORT || 4000, () => {
+    console.log("Server on port 4000");
+});
 router.get("/", (req, res) => {
     return res.json(productos.content);
   });

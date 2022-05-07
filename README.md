@@ -3,7 +3,7 @@ Desafios semanales
 En este repo se encuentran los desafios semanales del curso de backend dictado por Coderhouse.
 
 
-<h1>Consigna Desafio 1</h1>
+<h1>Consigna Desafio 1 Javascript</h1>
 <h2>Declarar una clase Usuario</h2>
 
 Hacer que Usuario cuente con los siguientes atributos:
@@ -30,7 +30,7 @@ Crear un objeto llamado usuario con valores arbitrarios e invocar todos sus mét
 
 </hr>
 
-<h1>Consigna Desafio 2</h1>
+<h1>Consigna Desafio 2 Manejo de Archivos</h1>
 
 <h2>Implementar programa que contenga una clase llamada Contenedor que reciba el nombre del archivo con el que va a trabajar e implemente los siguientes métodos: </h2>
 
@@ -57,3 +57,34 @@ Aspectos a incluir
 - Incluir un llamado de prueba a cada método, y mostrando por pantalla según corresponda para verificar el correcto funcionamiento del módulo construído.
 
 - El formato de cada producto será : { title: (nombre del producto), price: (precio), thumbnail: (url de la foto del producto) }
+
+</hr>
+
+<h1>Consigna Desafio 3 Servidores Express </h1>
+
+<h2>Realizar un proyecto de servidor basado en node.js que utilice el módulo express e implemente los siguientes endpoints en el puerto 8080:: </h2>
+
+
+-Ruta get '/productos' que devuelva un array con todos los productos disponibles en el servidor
+
+-Ruta get '/productoRandom' que devuelva un producto elegido al azar entre todos los productos disponibles
+
+-Incluir un archivo de texto 'productos.txt' y utilizar la clase Contenedor del desafío anterior para acceder a los datos persistidos del servidor.
+
+</hr>
+
+<h1>Consigna Desafio 4 APis Restful</h1>
+
+<h2>Realizar un proyecto de servidor basado en node.js y express que ofrezca una API RESTful de productos. En detalle, que incorpore las siguientes rutas:</h2>
+
+-GET '/api/productos' -> devuelve todos los productos.
+
+-GET '/api/productos/:id' -> devuelve un producto según su id.
+
+-POST '/api/productos' -> recibe y agrega un producto, y lo devuelve con su id asignado.
+
+-PUT '/api/productos/:id' -> recibe y actualiza un producto según su id.
+
+-DELETE '/api/productos/:id' -> elimina un producto según su id.
+
+</hr>
