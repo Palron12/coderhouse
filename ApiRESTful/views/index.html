@@ -2,10 +2,10 @@
     Carga de productos
   </h1>
   
-  <form action="/api/productos" method="post">
+  <form action="/api/productos" method="post" enctype="multipart/form-data">
     Title: <input type="text" name="title" /><br /><br />
     Price: <input type="number" name="price" /><br /><br />
-    Thumbnail: <input type="text" name="thumbnail" /><br /><br />
+    Thumbnail:  <input type="file" name="thumbnail" /><br /><br />
   
     <button
       type="submit"
@@ -13,4 +13,5 @@
     >
       Agregar producto
     </button>
+    
   </form>

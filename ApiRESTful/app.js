@@ -1,41 +1,16 @@
 const express = require("express");
-const Contenedor = require("./contenedor/contenedor");
-const { Router } = express;
-
 const app = express();
+const main = require ('./router/main.js');
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const router = Router();
-const productos = new Contenedor(__dirname + "/data/productos.json");
 
-app.use("/api/productos", router);
+app.use("/api/productos", main);
 app.use(express.static("./views"));
 
-app.listen(process.env.PORT || 4000, () => {
-    console.log("Server on port 4000");
+app.listen(process.env.PORT || 8080, () => {
+    console.log("Server on port 8080");
 });
-router.get("/", (req, res) => {
-    return res.json(productos.content);
-  });
-  
-  router.get("/:id", (req, res) => {
-    let id = Number(req.params.id);
-    return res.json(productos.getById(id));
-  });
-  
-  router.post("/", (req, res) => {
-    let obj = req.body;
-    return res.json(productos.save(obj));
-  });
-  
-  router.put("/:id", (req, res) => {
-    let obj = req.body;
-    let id = Number(req.params.id);
-    return res.json(productos.update(id, obj));
-  });
-  
-  router.delete("/:id", (req, res) => {
-    let id = Number(req.params.id);
-    return res.json(productos.deleteById(id));
-  });
+// <-- Rutas -->

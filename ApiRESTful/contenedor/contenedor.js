@@ -1,5 +1,6 @@
 
 const fs = require('fs')
+const path = require("path");
 
 class Contenedor {
     constructor(name) {
@@ -26,6 +27,7 @@ class Contenedor {
     }
 
     save(object) {
+       
         this.countID++ //Aumento la propiedad que va guardando el ID más alto
         object["id"] = this.countID //Agrego la propiedad id al objeto pasado como parámetro
         this.content.push(object) //Agrego el objeto al contenido(array)
