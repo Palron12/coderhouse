@@ -1,59 +1,51 @@
 const express = require("express");
 const Contenedor = require("./contenedor/contenedor");
-const handlebars = require("express-handlebars");
+const productos = new Contenedor(__dirname + "/data/productos.json");
 const { Server: HttpServer } = require("http");
 const { Server: IOServer } = require("socket.io");
-
+const { Router } = require('express')
+const router = Router()
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("./views/layouts"));
 
-const productos = new Contenedor(__dirname + "/data/productos.json");
+
 const messages = []
 
-app.engine(
-  "hbs",
-  handlebars.engine({
+app.use(express.static('./public'))
+app.use(express.static("./views"));
 
-    extname: ".hbs",
-    partialsDir: __dirname + "./views/partials",
-  })
-);
-app.set("views engine", "hbs");
-app.set("views", "./views");
+app.get('/',(req,res) => {
+  res.sendFile('index', {root: __dirname})
+})
 
-
-app.get("/", (req, res) => {
-  let content = productos.content;
-  let boolean = content.length !== 0;
-  return res.render("layouts/main.hbs", {
-    list: content,
-    showList: boolean,
-  });
-});
-
-app.post("/", (req, res) => {
-  productos.save(req.body);
-  let content = productos.content;
-  let boolean = content.length !== 0;
-  return res.render("layouts/main.hbs", { list: content, showList: boolean });
-});
+router.get('/',(req,res) =>{
+  const elements = productos.getAll()
+  res.send(JSON.stringify(elements))
+})
 
 httpServer.listen(process.env.PORT || 8080, () => {
   console.log("SERVER ON");
 });
+io.on('connection', (socket) =>{
+  console.log('usuario conectado')
+  socket.on('new_product',async (data)=>{
+      await productos.save(data)
+      io.sockets.emit('products', data)
+  })
+})
 
-/* CHAT */
-io.on("connection", (socket) => {
-    socket.emit("messages", messages);
-  
-    socket.on("new-message", (data) => {
-      data.time = new Date().toLocaleString();
-      messages.push(data);
-      io.sockets.emit("messages", [data]);
-    });
-  });
+
+io.on('connection', (socket)=>{
+  socket.emit('messages', messages)
+  socket.on('new_message', data =>{
+      data.time = new Date().toLocaleTimeString()
+      data.date = new Date().toLocaleDateString()
+      messages.push(data)
+      io.sockets.emit('messages', [data])
+  })
+
+})
