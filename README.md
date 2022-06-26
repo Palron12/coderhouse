@@ -115,3 +115,56 @@ Por escrito, indicar cuál de los tres motores de plantillas prefieres para tu p
 Desarrollar también un script que utilizando knex cree las tablas necesarias para la persistencia en cuestión (tabla productos en mariaDb).
 
 </hr>
+
+<h1>Desafio 8 - MONGODB</h1>
+
+<h2>Consigna</h2>
+
+-Agregar 10 documentos con valores distintos a las colecciones mensajes y productos. El formato de los documentos debe estar en correspondencia con el que venimos utilizando en el entregable con base de datos MariaDB.
+
+-Definir las claves de los documentos en relación a los campos de las tablas de esa base. En el caso de los productos, poner valores al campo precio entre los 100 y 5000 pesos(eligiendo valores intermedios, ej: 120, 580, 900, 1280, 1700, 2300, 2860, 3350, 4320, 4990).
+
+-Listar todos los documentos en cada colección.
+
+-Mostrar la cantidad de documentos almacenados en cada una de ellas.
+
+-Realizar un CRUD sobre la colección de productos:
+
+-Agregar un producto más en la colección de productos
+
+-Realizar una consulta por nombre de producto específico: Listar los productos con precio menor a 1000 pesos. Listar los productos con precio entre los 1000 a 3000 pesos. Listar los productos con precio mayor a 3000 pesos. Realizar una 
+consulta que traiga sólo el nombre del tercer producto más barato.
+
+-Hacer una actualización sobre todos los productos, agregando el campo stock a todos ellos con un valor de 100.
+Cambiar el stock a cero de los productos con precios mayores a 4000 pesos.
+
+-Borrar los productos con precio menor a 1000 pesos
+
+</hr>
+
+<h1>Desafio 9 - MOCKS Y NORMALIZACIÓN</h1>
+
+<h2>Consigna</h2>
+
+-Sobre el desafío entregable de la clase 16, crear una vista en forma de tabla que consuma desde la ruta ‘/api/productos-test’ del servidor una lista con 5 productos generados al azar utilizando Faker.js como generador de información aleatoria de test (en lugar de tomarse desde la base de datos). Elegir apropiadamente los temas para conformar el objeto ‘producto’ (nombre, precio y foto).
+
+-Ahora, vamos a reformar el formato de los mensajes y la forma de comunicación del chat (centro de mensajes). El nuevo formato de mensaje será: { author: { id: 'mail del usuario', nombre: 'nombre del usuario', apellido: 'apellido del usuario', edad: 'edad del usuario', alias: 'alias del usuario', avatar: 'url avatar (foto, logo) del usuario' }, text: 'mensaje del usuario' }
+
+<h2>Aspectos a incluir en el entregable:</h2>
+
+-Modificar la persistencia de los mensajes para que utilicen un contenedor que permita guardar objetos anidados (archivos, mongodb, firebase).
+
+-El mensaje se envía del frontend hacia el backend, el cual lo almacenará en la base de datos elegida. 
+-Luego cuando el cliente se conecte o envie un mensaje, recibirá un array de mensajes a representar en su vista.
+
+-El array que se devuelve debe estar normalizado con normalizr, conteniendo una entidad de autores. 
+
+-Considerar que el array tiene sus autores con su correspondiente id (mail del usuario), pero necesita incluir para el proceso de normalización un id para todo el array en su conjunto (podemos asignarle nosotros un valor fijo). Ejemplo: { id: ‘mensajes’, mensajes: [ ] }
+
+-El frontend debería poseer el mismo esquema de normalización que el backend, para que este pueda desnormalizar y presentar la información adecuada en la vista.
+
+-Considerar que se puede cambiar el nombre del id que usa normalizr, agregando un tercer parametro a la función schema.Entity, por ejemplo: const schemaAuthor = new schema.Entity('author',{...},{idAttribute: 'email'}); En este schema cambia el nombre del id con que se normaliza el nombre de los autores a 'email'..
+
+-Presentar en el frontend (a modo de test) el porcentaje de compresión de los mensajes recibidos. Puede ser en el título del centro de mensajes.
+
+</hr>
