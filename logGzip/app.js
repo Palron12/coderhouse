@@ -17,7 +17,7 @@ const adavancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 /* ------------------------------------- */
 
 //Session config
-app.use(
+/*9app.use(
   session({
     store: MongoStore.create({
       mongoUrl: process.env.MONGOATLAS,
@@ -27,7 +27,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
   })
-);
+);*/
 
 //Middlewares
 app.use(express.json());

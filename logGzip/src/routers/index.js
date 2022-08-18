@@ -11,6 +11,6 @@ router.use('/productos', productsRouter)
 router.use('/chat', chatRouter)
 router.use('/', fakerRouter)
 router.use('/', sessionRouter)
-router.use('/', loginRouter)
+router.use('/info', loginRouter)
 
 module.exports = router;
